@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Special Bond - Happy Raksha Bandhan</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-gold: #ffdf79;
+      --secondary-gold: #e5a93b;
+      --accent-pink: #ff3366;
+      --accent-orange: #ff7b25;
+      --bg-gradient: radial-gradient(circle at 50% 20%, #4a0e4e 0%, #2b0836 45%, #15031d 100%);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 223, 121, 0.35);
+      --glass-glow: 0 8px 32px 0 rgba(255, 51, 102, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-gradient);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .bg-lights {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .light-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: float-orb 18s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      background: #e91e63;
+      top: -10%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: #ff9800;
+      bottom: 10%;
+      right: -10%;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: #9c27b0;
+      top: 40%;
+      left: 30%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float-orb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.1); }
+      100% { transform: translate(-40px, 80px) scale(0.95); }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #confetti-canvas {
+      z-index: 15;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    .rakhi-container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 15px auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 25px rgba(255, 170, 0, 0.55));
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+
+    .rakhi-svg {
+      width: 100%;
+      height: 100%;
+      animation: slowRotate 24s linear infinite;
+    }
+
+    .rakhi-threads {
+      position: absolute;
+      width: 320px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff3366, #ffdf79, #ff7b25, transparent);
+      z-index: -1;
+    }
+
+    @keyframes slowRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.97); filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.4)); }
+      100% { transform: scale(1.03); filter: drop-shadow(0 0 35px rgba(255, 51, 102, 0.7)); }
+    }
+
+    .title-banner {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      color: var(--primary-gold);
+      text-shadow: 0 0 15px rgba(255, 223, 121, 0.6);
+      margin-bottom: 5px;
+    }
+
+    .main-heading {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 20%, var(--primary-gold) 60%, var(--accent-orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .sub-heading {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .diyas-row {
+      display: flex;
+      gap: 50px;
+      margin-bottom: 30px;
+    }
+
+    .diya {
+      width: 44px;
+      height: 24px;
+      background: linear-gradient(180deg, #d35400, #962d00);
+      border-radius: 0 0 40px 40px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
+    }
+
+    .diya::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(ellipse at bottom, #fff 10%, #ffeb3b 40%, #ff5722 80%, transparent 100%);
+      border-radius: 50% 50% 35% 35%;
+      filter: drop-shadow(0 0 8px #ff9800);
+      animation: flicker 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+      50% { transform: translateX(-50%) scale(1.15) rotate(3deg); opacity: 1; filter: drop-shadow(0 0 14px #ffb300); }
+      100% { transform: translateX(-50%) scale(0.95) rotate(-1deg); opacity: 0.85; }
+    }
+
+    .btn-reveal {
+      position: relative;
+      background: linear-gradient(135deg, #ff3366, #ff7b25, #ffb300);
+      background-size: 200% 200%;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 16px 38px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(255, 51, 102, 0.45), 0 0 0 2px rgba(255, 223, 121, 0.4);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: gradientShift 4s ease infinite;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .btn-reveal:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(255, 51, 102, 0.65), 0 0 0 3px rgba(255, 223, 121, 0.8);
+    }
+
+    .btn-reveal:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .message-container {
+      width: 100%;
+      max-width: 680px;
+      margin-top: 45px;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      pointer-events: none;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .message-container.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 28px;
+      padding: clamp(25px, 5vw, 45px);
+      box-shadow: var(--glass-glow), 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(255,223,121,0.6), transparent 50%, rgba(255,51,102,0.4));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--primary-gold);
+      margin-bottom: 20px;
+    }
+
+    .message-body {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 300;
+      text-align: left;
+      min-height: 120px;
+    }
+
+    .message-body p {
+      margin-bottom: 14px;
+    }
+
+    .card-signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: var(--primary-gold);
+      text-align: right;
+      margin-top: 25px;
+    }
+
+    .player-dock {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      width: calc(100% - 30px);
+      max-width: 440px;
+      background: rgba(30, 8, 38, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 223, 121, 0.3);
+      border-radius: 100px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(255, 51, 102, 0.2);
+    }
+
+    .player-info {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .song-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .song-subtitle {
+      font-size: 0.75rem;
+      color: var(--primary-gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .visualizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+      margin-left: 2px;
+    }
+
+    .v-bar {
+      width: 2.5px;
+      height: 3px;
+      background-color: var(--primary-gold);
+      border-radius: 2px;
+      transition: height 0.1s ease;
+    }
+
+    .playing .v-bar:nth-child(1) { animation: bounce 0.6s infinite ease alternate; }
+    .playing .v-bar:nth-child(2) { animation: bounce 0.8s infinite ease alternate 0.2s; }
+    .playing .v-bar:nth-child(3) { animation: bounce 0.5s infinite ease alternate 0.4s; }
+    .playing .v-bar:nth-child(4) { animation: bounce 0.7s infinite ease alternate 0.1s; }
+
+    @keyframes bounce {
+      from { height: 3px; }
+      to { height: 14px; }
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ctrl-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--primary-gold);
+    }
+
+    .ctrl-btn:active {
+      transform: scale(0.9);
+    }
+
+    .ctrl-btn.play-btn {
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+      width: 40px;
+      height: 40px;
+    }
+
+    .ctrl-btn.play-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .ctrl-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .content-wrapper {
+        padding-top: 25px;
+      }
+      .rakhi-container {
+        width: 180px;
+        height: 180px;
+      }
+      .diyas-row {
+        gap: 30px;
+      }
+      .player-dock {
+        bottom: 15px;
+        padding: 8px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-lights">
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+    <div class="light-orb orb-3"></div>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="content-wrapper">
+    <div class="hero-section">
+      <div class="title-banner">A Special Bond</div>
+      
+      <div class="rakhi-container">
+        <div class="rakhi-threads"></div>
+        <svg class="rakhi-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff0a5"/>
+              <stop offset="50%" stop-color="#ffd23f"/>
+              <stop offset="100%" stop-color="#ee591f"/>
+            </linearGradient>
+            <radialGradient id="rubyGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff4b72"/>
+              <stop offset="80%" stop-color="#ab0e39"/>
+              <stop offset="100%" stop-color="#560017"/>
+            </radialGradient>
+          </defs>
+          
+          <g transform="translate(100, 100)">
+            <g id="petals">
+              <circle cx="0" cy="-65" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="32.5" cy="-56.2" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="56.2" cy="-32.5" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="65" cy="0" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="56.2" cy="32.5" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="32.5" cy="56.2" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="0" cy="65" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="-32.5" cy="56.2" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="-56.2" cy="32.5" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="-65" cy="0" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="-56.2" cy="-32.5" r="14" fill="url(#goldGrad)" opacity="0.9" />
+              <circle cx="-32.5" cy="-56.2" r="14" fill="url(#goldGrad)" opacity="0.9" />
+            </g>
+            <circle cx="0" cy="0" r="48" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-dasharray="6,4"/>
+            <circle cx="0" cy="0" r="38" fill="url(#rubyGrad)" stroke="#ffdf79" stroke-width="2.5"/>
+            <polygon points="0,-24 7,-8 24,0 7,8 0,24 -7,8 -24,0 -7,-8" fill="url(#goldGrad)"/>
+            <circle cx="0" cy="0" r="6" fill="#ffffff"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1 class="main-heading">Happy Raksha Bandhan ❤️</h1>
+      <p class="sub-heading">A timeless bond of love, silent prayers, endless laughter, and memories cherished for a lifetime.</p>
+
+      <div class="diyas-row">
+        <div class="diya"></div>
+        <div class="diya"></div>
+      </div>
+
+      <button class="btn-reveal" id="btnReveal" onclick="revealMessage()">
+        <span>Open Special Message 💌</span>
+      </button>
+    </div>
+
+    <div class="message-container" id="messageContainer">
+      <div class="glass-card">
+        <h2 class="card-title">For My Special Sister UNNATI ❤️</h2>
+        <div class="message-body" id="typewriterTarget"></div>
+        <div class="card-signature">With all my love & blessings ✨</div>
+      </div>
+    </div>
+  </div>
+
+ <audio id="bgAudio" src="https://github.com/designer4529-sudo/Rakhi/raw/refs/heads/main/music.mp3" preload="metadata" loop></audio>
+
+  <div class="player-dock">
+    <div class="player-info">
+      <div class="song-title">Raksha Bandhan Special 🎵</div>
+      <div class="song-subtitle">
+        <span>Festive Melodies</span>
+        <div class="visualizer" id="visualizer">
+          <div class="v-bar"></div>
+          <div class="v-bar"></div>
+          <div class="v-bar"></div>
+          <div class="v-bar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="player-controls">
+      <button class="ctrl-btn" onclick="restartAudio()" title="Restart" aria-label="Restart song">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="playBtn" onclick="toggleAudio()" title="Play" aria-label="Play / Pause">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()" title="Mute" aria-label="Mute / Unmute">
+        <svg id="volHighIcon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <svg id="volMuteIcon" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = -20 - Math.random() * 50;
+        this.size = 8 + Math.random() * 12;
+        this.speedY = 0.8 + Math.random() * 1.5;
+        this.speedX = Math.sin(Math.random() * Math.PI) * 0.8;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 1.8;
+        this.opacity = 0.4 + Math.random() * 0.5;
+        this.color = Math.random() > 0.4 ? '#ff5376' : '#ffb07c';
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.015) + this.speedX;
+        this.rotation += this.rotSpeed;
+        if (this.y > height + 20 || this.x < -30 || this.x > width + 30) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(this.size / 2, -this.size / 2, this.size, 0);
+        ctx.quadraticCurveTo(this.size / 2, this.size / 2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    class Sparkle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = 1 + Math.random() * 2.5;
+        this.alpha = 0.1 + Math.random() * 0.8;
+        this.alphaSpeed = (0.005 + Math.random() * 0.015) * (Math.random() > 0.5 ? 1 : -1);
+      }
+      update() {
+        this.alpha += this.alphaSpeed;
+        if (this.alpha > 0.9 || this.alpha < 0.1) {
+          this.alphaSpeed = -this.alphaSpeed;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.fillStyle = '#ffdf79';
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#ffe27a';
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const petals = Array.from({ length: 28 }, () => new Petal());
+    const sparkles = Array.from({ length: 45 }, () => new Sparkle());
+
+    function animateEnvironment() {
+      ctx.clearRect(0, 0, width, height);
+      sparkles.forEach(s => { s.update(); s.draw(); });
+      petals.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateEnvironment);
+    }
+    animateEnvironment();
+
+    const confCanvas = document.getElementById('confetti-canvas');
+    const confCtx = confCanvas.getContext('2d');
+    let confWidth, confHeight;
+    let confettis = [];
+
+    function resizeConfetti() {
+      confWidth = confCanvas.width = window.innerWidth;
+      confHeight = confCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeConfetti);
+    resizeConfetti();
+
+    class ConfettiPiece {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 5 + Math.random() * 12;
+        this.vx = Math.cos(angle) * velocity;
+        this.vy = Math.sin(angle) * velocity - 3;
+        this.gravity = 0.25;
+        this.drag = 0.96;
+        this.size = 6 + Math.random() * 8;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 15;
+        this.colors = ['#ff3366', '#ffdf79', '#ff9800', '#00e5ff', '#ffffff', '#e040fb'];
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        this.opacity = 1;
+      }
+      update() {
+        this.vx *= this.drag;
+        this.vy *= this.drag;
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotSpeed;
+        this.opacity -= 0.012;
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        confCtx.save();
+        confCtx.translate(this.x, this.y);
+        confCtx.rotate((this.rotation * Math.PI) / 180);
+        confCtx.fillStyle = this.color;
+        confCtx.globalAlpha = Math.max(0, this.opacity);
+        confCtx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+        confCtx.restore();
+      }
+    }
+
+    function fireConfetti() {
+      const rect = document.getElementById('btnReveal').getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 110; i++) {
+        confettis.push(new ConfettiPiece(originX, originY));
+      }
+    }
+
+    function animateConfetti() {
+      confCtx.clearRect(0, 0, confWidth, confHeight);
+      confettis = confettis.filter(c => c.opacity > 0);
+      confettis.forEach(c => {
+        c.update();
+        c.draw();
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+
+    const messageParagraphs = [
+      "No matter the distance between us or how busy life gets, the sacred thread of Rakhi is a constant reminder of the laughter we've shared, the silly fights we've survived, and the unspoken promises we hold for each other.",
+      "Thank you for being my lifelong anchor, my secret-keeper, and my biggest cheerleader. Today and every day, I pray for your infinite happiness, great health, success, and protection.",
+      "Happy Raksha Bandhan! May our unique bond grow stronger with every passing season."
+    ];
+
+    let revealed = false;
+
+    function revealMessage() {
+      if (revealed) return;
+      revealed = true;
+
+      fireConfetti();
+
+      const btn = document.getElementById('btnReveal');
+      btn.style.transform = 'scale(0.95)';
+      setTimeout(() => { btn.style.display = 'none'; }, 300);
+
+      const msgContainer = document.getElementById('messageContainer');
+      msgContainer.classList.add('visible');
+
+      setTimeout(() => {
+        msgContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 400);
+
+      typewriterEffect();
+    }
+
+    function typewriterEffect() {
+      const target = document.getElementById('typewriterTarget');
+      target.innerHTML = '';
+      
+      let pIndex = 0;
+      let charIndex = 0;
+      let currentP = document.createElement('p');
+      target.appendChild(currentP);
+
+      function typeChar() {
+        if (pIndex < messageParagraphs.length) {
+          const currentText = messageParagraphs[pIndex];
+          if (charIndex < currentText.length) {
+            currentP.innerHTML += currentText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeChar, 18);
+          } else {
+            pIndex++;
+            charIndex = 0;
+            if (pIndex < messageParagraphs.length) {
+              currentP = document.createElement('p');
+              target.appendChild(currentP);
+              setTimeout(typeChar, 250);
+            }
+          }
+        }
+      }
+      typeChar();
+    }
+
+    const audio = document.getElementById('bgAudio');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const volHighIcon = document.getElementById('volHighIcon');
+    const volMuteIcon = document.getElementById('volMuteIcon');
+    const visualizer = document.getElementById('visualizer');
+
+    function updatePlayerState() {
+      if (audio.paused) {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        visualizer.classList.remove('playing');
+      } else {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+        visualizer.classList.add('playing');
+      }
+    }
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play().then(() => {
+          updatePlayerState();
+        }).catch((e) => {
+          console.warn("Audio playback couldn't start automatically:", e);
+        });
+      } else {
+        audio.pause();
+        updatePlayerState();
+      }
+    }
+
+    function restartAudio() {
+      audio.currentTime = 0;
+      audio.play().then(() => {
+        updatePlayerState();
+      }).catch(console.warn);
+    }
+
+    function toggleMute() {
+      audio.muted = !audio.muted;
+      if (audio.muted) {
+        volHighIcon.style.display = 'none';
+        volMuteIcon.style.display = 'block';
+      } else {
+        volHighIcon.style.display = 'block';
+        volMuteIcon.style.display = 'none';
+      }
+    }
+
+    audio.addEventListener('play', updatePlayerState);
+    audio.addEventListener('pause', updatePlayerState);
+    audio.addEventListener('ended', updatePlayerState);
+  </script>
+</body>
+</html>
